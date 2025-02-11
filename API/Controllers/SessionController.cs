@@ -1,3 +1,4 @@
+using API.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
@@ -8,12 +9,12 @@ public class SessionController : ControllerBase
 {
     [HttpPost]
     [Route("login")]
-    public IActionResult Login(string userId)
+    public IActionResult Login(LoginDTO login)
     {
         CookieOptions options = new CookieOptions();
         options.Expires = DateTime.Now.AddMinutes(1);
-        Response.Cookies.Append("GraphApp", userId, options);
-        return Ok();
+        Response.Cookies.Append("GraphApp", "77", options);
+        return Ok("Logged in");
     }
 
     [HttpGet]
@@ -21,6 +22,6 @@ public class SessionController : ControllerBase
     public IActionResult Logout()
     {
         Response.Cookies.Delete("GraphApp");
-        return Ok();
+        return Ok("Logged out");
     }
 }
